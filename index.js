@@ -1,5 +1,6 @@
 const {Worker, isMainThread} = require('worker_threads');
 const app = require('express')();
+const os = require('os');
 
 let worker;
 //Let's just check if it is a main thread or the worker thread
@@ -29,6 +30,8 @@ app.get('/', (req, res) => {
   someRandomText = JSON.stringify({name: 'Aditya', age: 28});
   worker.postMessage(someRandomText);
   res.send('Response has been sent, please check back your email after sometimes');
+  const cpuInfo = os.cpus();
+  console.log(cpuInfo);
 });
 
 app.listen(3000, () => {
